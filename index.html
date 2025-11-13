@@ -4,22 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <title>Todo List</title>
 </head>
-<body>
-    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lime-300 flex items-center space-x-14 space-y-4">
-        <div>
-            <div class="text-xl font-medium text-black">Todo List</div>
-            <div>
-                <input type="text" placeholder="Add a new task" class="mt-2 p-2 border border-gray-300 rounded w-full"></div>
-                <input type="date" class="mt-2 p-2 border border-gray-300 rounded w-full"></div>
-                <input type="button" value="+" class="mt-2 p-2 bg-green-500 text-white rounded size-10 cursor-pointer"></div>
-                <input type="button" value="+" class="mt-2 p-2 bg-green-500 text-white rounded size-10 cursor-pointer"></div>            
-                <input type="button" value="+" class="mt-2 p-2 bg-green-500 text-white rounded size-10 cursor-pointer"></div>            
-            </div>
-            <div class="mt-4">
-                
-            </div>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md mx-auto mt-10 p-6 bg-yellow-100 rounded shadow-lg rounded-lg">
+        <h1 class="text-2xl font-semibold text-center text-color mb-6">Todo list</h1>
+        <!-- input form -->
+        <div class="flex gap-2 jus mb-4">
+            <input type="text" placeholder="Add a new task" class="bg-white flex-1 p-2 rounded text-black">
+            <input type="date" class="bg-white p-2 rounded text-black">
+            <button class="bg-green-500 hover:bg-green-700 rounded px-4 py-2 text-white">+</button>
+        </div>
+        
+        <!-- Filter & Delete -->
+        <div class="flex justify-between mb-4">
+            <button class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 rounded">FILTER</button>
+            <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded">DELETE</button>
+        </div>
+
+        <!-- table -->
+        <div class="overflow-x-auto">
+            <table class="bg-white  min-w-full text-center border-collapse border border-gray-200">
+                <thead>
+                    <tr>
+                        <th class="py-2">TASK</th>
+                        <th class="py-2">DUE DATE</th>
+                        <th class="py-2">STATUS</th>
+                        <th class="py-2">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center py-4">NO TASK FOUND</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
