@@ -1,45 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Todo List</title>
-</head>
-<body class="flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-md mx-auto mt-10 p-6 bg-yellow-100 rounded shadow-lg rounded-lg">
-        <h1 class="text-2xl font-semibold text-center text-color mb-6">Todo list</h1>
-        <!-- input form -->
-        <div class="flex gap-2 jus mb-4">
-            <input type="text" placeholder="Add a new task" class="bg-white flex-1 p-2 rounded text-black">
-            <input type="date" class="bg-white p-2 rounded text-black">
-            <button class="bg-green-500 hover:bg-green-700 rounded px-4 py-2 text-white">+</button>
-        </div>
-        
-        <!-- Filter & Delete -->
-        <div class="flex justify-between mb-4">
-            <button class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 rounded">FILTER</button>
-            <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded">DELETE</button>
-        </div>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Todo List</title>
 
-        <!-- table -->
-        <div class="overflow-x-auto">
-            <table class="bg-white  min-w-full text-center border-collapse border border-gray-200">
-                <thead>
-                    <tr>
-                        <th class="py-2">TASK</th>
-                        <th class="py-2">DUE DATE</th>
-                        <th class="py-2">STATUS</th>
-                        <th class="py-2">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="4" class="text-center py-4">NO TASK FOUND</td>
-                    </tr>
-                </tbody>
-            </table>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 text-slate-700 flex items-center justify-center p-6">
+
+  <main class="w-full max-w-3xl">
+    <section class="mx-auto rounded-2xl bg-gradient-to-b from-white/90 to-blue-50/80 ring-2 ring-indigo-200/60 p-6 shadow-lg">
+      <h1 class="text-3xl font-semibold text-center mb-6 tracking-wide">Todo List</h1>
+
+      <form id="todo-form" class="flex gap-3 items-start">
+        <input id="taskInput" type="text" placeholder="Add a todo..." 
+               class="flex-1 rounded-lg px-4 py-2 bg-white border border-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="dateInput" type="date" class="w-40 rounded-lg px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <button type="submit" class="text-white ml-2 rounded-lg px-4 py-2 bg-indigo-500 hover:bg-indigo-600 transition">+</button>
+      </form>
+
+      <div class="mt-4 flex items-center justify- gap-4">
+        <div class="flex items-center gap-2">
+          <select id="filter-select" class="rounded-md px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-slate-700">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="done">Done</option>
+            <option value="overdue">Overdue</option>
+          </select>
+          <button id="delete-all" class="ml-2 rounded-md px-3 py-2 bg-rose-400 hover:bg-rose-500 transition text-white">DELETE ALL</button>
         </div>
-    </div>
+        <div id="message" class="text-sm text-slate-500"></div>
+      </div>
+
+      <!-- Table / list -->
+      <div class="mt-4 bg-white rounded-lg border border-indigo-100 overflow-hidden">
+        <table class="w-full text-left table-fixed">
+          <thead class="bg-gradient-to-r from-indigo-50 to-purple-50 text-slate-700">
+            <tr>
+              <th class="p-3 w-1/2">Task</th>
+              <th class="p-3 w-1/6">Due Date</th>
+              <th class="p-3 w-1/6">Status</th>
+              <th class="p-3 w-1/6">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="todo-list" class="divide-y divide-indigo-100">
+            <tr id="no-tasks" class="text-center">
+              <td colspan="4" class="p-6 text-slate-400">No task found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
