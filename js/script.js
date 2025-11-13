@@ -71,20 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td class="p-2 md:p-3 break-words text-sm md:text-base">${todo.text}</td>
-        <td class="p-2 md:p-3 text-xs md:text-base">${todo.due || "-"}</td>
-        <td class="p-2 md:p-3">
+        <td class="p-1 sm:p-3 text-xs sm:text-sm truncate">${todo.text}</td>
+        <td class="p-1 sm:p-3 text-xs sm:text-sm whitespace-nowrap">${todo.due || "-"}</td>
+        <td class="p-1 sm:p-3 text-xs sm:text-sm">
           <span class="${badgeClasses}">${statusText}</span>
         </td>
-        <td class="p-2 md:p-3">
-          <div class="flex items-center gap-1 md:gap-2">
-            <button data-index="${index}" class="toggle rounded-md px-1.5 md:px-2 py-1 bg-green-600 hover:bg-green-700 transition text-white flex items-center justify-center text-sm md:text-base" aria-label="Toggle done" title="Toggle done">
-              <span class="material-symbols-outlined text-lg md:text-xl" aria-hidden="true">check</span>
-              <span class="sr-only">Toggle done</span>
+        <td class="p-1 sm:p-3 text-xs sm:text-sm">
+          <div class="flex items-center gap-0.5 sm:gap-2">
+            <button data-index="${index}" class="toggle rounded px-1.5 py-1 bg-green-600 hover:bg-green-700 transition text-white flex items-center justify-center text-xs sm:text-sm" aria-label="Toggle done" title="Toggle done">
+              <span class="material-symbols-outlined text-xs sm:text-sm" aria-hidden="true" style="font-size: 16px;">check</span>
             </button>
-            <button data-index="${index}" class="delete rounded-md px-1.5 md:px-2 py-1 bg-rose-600 hover:bg-rose-700 transition text-white flex items-center justify-center text-sm md:text-base" aria-label="Delete task" title="Delete">
-              <span class="material-symbols-outlined text-lg md:text-xl" aria-hidden="true">delete</span>
-              <span class="sr-only">Delete</span>
+            <button data-index="${index}" class="delete rounded px-1.5 py-1 bg-rose-600 hover:bg-rose-700 transition text-white flex items-center justify-center text-xs sm:text-sm" aria-label="Delete task" title="Delete">
+              <span class="material-symbols-outlined text-xs sm:text-sm" aria-hidden="true" style="font-size: 16px;">delete</span>
             </button>
           </div>
         </td>
