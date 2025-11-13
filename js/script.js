@@ -16,10 +16,31 @@ document.addEventListener("DOMContentLoaded", () => {
     listEl.innerHTML = "";
 
     const filter = filterSelect.value;
-    let filtered = todos;
 
-    if (filter === "pending") filtered = todos.filter(t => !t.done);
-    if (filter === "done") filtered = todos.filter(t => t.done);
+    // prepare today (date-only) for overdue comparisons
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    let filtered = todos;
+    if (filter === "pending") {
+      // pending = not done and not overdue
+      filtered = todos.filter(t => {
+        if (t.done) return false;
+        if (!t.due) return true;
+        const d = new Date(t.due); d.setHours(0,0,0,0);
+        return d >= today;
+      });
+    }
+    if (filter === "done") {
+      filtered = todos.filter(t => t.done);
+    }
+    if (filter === "overdue") {
+      filtered = todos.filter(t => {
+        if (t.done || !t.due) return false;
+        const d = new Date(t.due); d.setHours(0,0,0,0);
+        return d < today;
+      });
+    }
 
     if (filtered.length === 0) {
       listEl.innerHTML = `
@@ -29,17 +50,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     filtered.forEach((todo, index) => {
-      const status = todo.done ? "Done" : "Pending";
+      // determine overdue state: has a due date, not done, and due date < today
+      let dueDate = null;
+      if (todo.due) {
+        dueDate = new Date(todo.due);
+        dueDate.setHours(0,0,0,0);
+      }
+      const isOverdue = !todo.done && dueDate && dueDate < today;
+
+      // status label and badge color
+      let statusText = "Pending";
+      let badgeClasses = "px-2 py-1 rounded-md text-xs bg-yellow-500 text-white";
+      if (todo.done) {
+        statusText = "Done";
+        badgeClasses = "px-2 py-1 rounded-md text-xs bg-green-600 text-white";
+      } else if (isOverdue) {
+        statusText = "Overdue";
+        badgeClasses = "px-2 py-1 rounded-md text-xs bg-rose-500 text-white";
+      }
+
       const row = document.createElement("tr");
       row.innerHTML = `
         <td class="p-3">${todo.text}</td>
         <td class="p-3">${todo.due || "-"}</td>
         <td class="p-3">
-          <span class="px-2 py-1 rounded-md text-xs ${todo.done ? "bg-green-700" : "bg-slate-700"}">${status}</span>
+          <span class="${badgeClasses}">${statusText}</span>
         </td>
         <td class="p-3">
-          <button data-index="${index}" class="toggle bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded-md text-sm">✔</button>
-          <button data-index="${index}" class="delete bg-rose-600 hover:bg-rose-700 px-2 py-1 rounded-md text-sm">🗑</button>
+          <div class="flex items-center gap-2">
+            <button data-index="${index}" class="toggle rounded-md px-2 py-1 bg-green-600 hover:bg-green-700 transition text-white flex items-center justify-center" aria-label="Toggle done" title="Toggle done">
+              <span class="material-symbols-outlined" aria-hidden="true">check</span>
+              <span class="sr-only">Toggle done</span>
+            </button>
+            <button data-index="${index}" class="delete rounded-md px-2 py-1 bg-rose-600 hover:bg-rose-700 transition text-white flex items-center justify-center" aria-label="Delete task" title="Delete">
+              <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+              <span class="sr-only">Delete</span>
+            </button>
+          </div>
         </td>
       `;
       listEl.appendChild(row);
@@ -76,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!text) {
       alert("Please enter a task");
+      return;
+    }
+
+    // require due date
+    if (!due) {
+      alert("Please select a due date for the task");
       return;
     }
 
