@@ -17,13 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filter = filterSelect.value;
 
-    // prepare today (date-only) for overdue comparisons
     const today = new Date();
     today.setHours(0,0,0,0);
 
     let filtered = todos;
     if (filter === "pending") {
-      // pending = not done and not overdue
       filtered = todos.filter(t => {
         if (t.done) return false;
         if (!t.due) return true;
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     filtered.forEach((todo, index) => {
-      // determine overdue state: has a due date, not done, and due date < today
       let dueDate = null;
       if (todo.due) {
         dueDate = new Date(todo.due);
@@ -58,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const isOverdue = !todo.done && dueDate && dueDate < today;
 
-      // status label and badge color (plant palette)
       let statusText = "Pending";
       let badgeClasses = "px-2 py-1 rounded-md text-xs bg-[#9DCB8D] text-[#164A41] font-semibold"; // light green
       if (todo.done) {
@@ -124,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // require due date
     if (!due) {
       alert("Please select a due date for the task");
       return;
