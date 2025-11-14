@@ -12,23 +12,33 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check,delete" />
 
+  <!-- Plant-style display font for headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* apply decorative plant-ish font to main headings */
+    .plant-heading { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.02em; }
+  </style>
+
 </head>
-<body class="min-h-screen bg-white flex items-center justify-center p-2 sm:p-6">
+<body class="min-h-screen bg-[#164A41] flex flex-col items-center justify-start p-2 sm:p-6">
 
   <main class="w-full max-w-3xl">
-    <section class="mx-auto rounded-2xl bg-gradient-to-b from-yellow-50/95 to-amber-50/90 p-3 sm:p-6 shadow-lg">
-      <h1 class="text-green-800 text-2xl sm:text-3xl font-semibold text-center mb-3 sm:mb-6 tracking-wide">Todo List</h1>
+    <section class="mx-auto rounded-2xl bg-gradient-to-b from-amber-50 to-yellow-50 p-3 sm:p-6 shadow-2xl border-4 border-amber-200">
+  <h1 class="plant-heading text-[#164A41] text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-6 tracking-wide">Todo List</h1>
 
       <form id="todo-form" class="flex flex-col sm:flex-row gap-3 items-start">
-        <input id="taskInput" type="text" placeholder="Add a todo..." 
-               class="flex-1 w-full rounded-lg px-4 py-2 bg-white border border-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-400" />
-        <input id="dateInput" type="date" class="w-full sm:w-40 rounded-lg px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-green-400" />
-        <button type="submit" class="w-full sm:w-auto text-white rounded-lg px-4 py-2 bg-green-600 hover:bg-green-700 transition">+</button>
+   <input id="taskInput" type="text" placeholder="Add a todo..." 
+     class="flex-1 w-full rounded-lg px-4 py-2 bg-white border-2 border-[#9DCB8D] placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#4D774E]" />
+   <input id="dateInput" type="date" class="w-full sm:w-40 rounded-lg px-3 py-2 bg-white border-2 border-[#9DCB8D] focus:outline-none focus:ring-2 focus:ring-[#4D774E]" />
+   <button type="submit" class="w-full sm:w-auto text-[#164A41] rounded-lg px-4 py-2 bg-[#F1B24A] hover:bg-[#e0a33f] transition font-bold text-lg">+</button>
       </form>
 
       <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div class="w-full sm:w-auto flex items-center gap-2">
-          <select id="filter-select" class="flex-1 sm:flex-none rounded-md px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-green-400 text-slate-700">
+          <select id="filter-select" class="flex-1 sm:flex-none rounded-md px-3 py-2 bg-white border-2 border-[#9DCB8D] focus:outline-none focus:ring-2 focus:ring-[#4D774E] text-[#164A41] font-semibold">
             <option value="all">All</option>
             <option value="pending">Pending</option>
             <option value="done">Done</option>
@@ -36,16 +46,16 @@
           </select>
         </div>
         <div class="w-full sm:w-auto flex items-center gap-2">
-          <div id="message" class="text-sm text-slate-500 flex-1 sm:flex-none"></div>
-          <button id="delete-all" class="w-full sm:w-auto rounded-md px-3 py-2 bg-rose-600 hover:bg-rose-700 transition text-white">DELETE ALL</button>
+          <div id="message" class="text-sm text-[#4D774E] flex-1 sm:flex-none font-medium"></div>
+          <button id="delete-all" class="w-full sm:w-auto rounded-md px-3 py-2 bg-[#F1B24A] hover:bg-[#e0a33f] transition text-[#164A41] font-bold">DELETE ALL</button>
         </div>
       </div>
 
       <!-- Table / list -->
-      <div class="mt-4 bg-white rounded-lg border border-green-200 overflow-hidden">
+      <div class="mt-4 bg-white/98 rounded-lg border-3 border-amber-300 overflow-hidden shadow-lg">
         <div class="max-h-96 overflow-y-auto">
           <table class="w-full text-left">
-            <thead class="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 sticky top-0">
+            <thead class="bg-[#4D774E] text-white sticky top-0 font-bold">
               <tr>
                 <th class="p-1 sm:p-3 text-xs sm:text-sm">Task</th>
                 <th class="p-1 sm:p-3 text-xs sm:text-sm whitespace-nowrap">Due Date</th>
@@ -53,7 +63,7 @@
                 <th class="p-1 sm:p-3 text-xs sm:text-sm">Actions</th>
               </tr>
             </thead>
-            <tbody id="todo-list" class="divide-y divide-green-100">
+            <tbody id="todo-list" class="divide-y divide-amber-100">
               <tr id="no-tasks" class="text-center">
                 <td colspan="4" class="p-6 text-slate-400">No task found</td>
               </tr>
@@ -64,6 +74,9 @@
     </section>
   </main>
 
+  <footer class="mt-6 pt-5 border-t-2 border-[#9DCB8D] text-center text-[#FFFFFF] w-full max-w-3xl">
+    <p>&copy; 2025 Todo List App by Yukie</p>
+  </footer>
   <script src="js/script.js"></script>
 </body>
 </html>

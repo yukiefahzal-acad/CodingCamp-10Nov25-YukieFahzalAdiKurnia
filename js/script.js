@@ -58,15 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const isOverdue = !todo.done && dueDate && dueDate < today;
 
-      // status label and badge color
+      // status label and badge color (plant palette)
       let statusText = "Pending";
-      let badgeClasses = "px-2 py-1 rounded-md text-xs bg-yellow-500 text-white";
+      let badgeClasses = "px-2 py-1 rounded-md text-xs bg-[#9DCB8D] text-[#164A41] font-semibold"; // light green
       if (todo.done) {
         statusText = "Done";
-        badgeClasses = "px-2 py-1 rounded-md text-xs bg-green-600 text-white";
+        badgeClasses = "px-2 py-1 rounded-md text-xs bg-[#4D774E] text-white font-semibold"; // mid green
       } else if (isOverdue) {
         statusText = "Overdue";
-        badgeClasses = "px-2 py-1 rounded-md text-xs bg-rose-500 text-white";
+        badgeClasses = "px-2 py-1 rounded-md text-xs bg-[#F1B24A] text-[#164A41] font-semibold"; // accent
       }
 
       const row = document.createElement("tr");
@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </td>
         <td class="p-1 sm:p-3 text-xs sm:text-sm">
           <div class="flex items-center gap-0.5 sm:gap-2">
-            <button data-index="${index}" class="toggle rounded px-1.5 py-1 bg-green-600 hover:bg-green-700 transition text-white flex items-center justify-center text-xs sm:text-sm" aria-label="Toggle done" title="Toggle done">
+            <button data-index="${index}" class="toggle rounded px-1.5 py-1 bg-[#4D774E] hover:bg-[#3f6240] transition text-white flex items-center justify-center text-xs sm:text-sm font-semibold" aria-label="Toggle done" title="Toggle done">
               <span class="material-symbols-outlined text-xs sm:text-sm" aria-hidden="true" style="font-size: 16px;">check</span>
             </button>
-            <button data-index="${index}" class="delete rounded px-1.5 py-1 bg-rose-600 hover:bg-rose-700 transition text-white flex items-center justify-center text-xs sm:text-sm" aria-label="Delete task" title="Delete">
+            <button data-index="${index}" class="delete rounded px-1.5 py-1 bg-[#F1B24A] hover:bg-[#e0a33f] transition text-[#164A41] flex items-center justify-center text-xs sm:text-sm font-semibold" aria-label="Delete task" title="Delete">
               <span class="material-symbols-outlined text-xs sm:text-sm" aria-hidden="true" style="font-size: 16px;">delete</span>
             </button>
           </div>
