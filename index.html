@@ -10,26 +10,45 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check,delete" />
 
   <style>
-    .plant-heading { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.02em; }
+    :root{
+      --bg-dark: #0F2A1D;
+      --bg-mid: #375534;
+      --primary: #6B9071;
+      --surface: #AEC3B0;
+      --cream: #E3EED4;
+      --text-dark: #0F2A1D;
+    }
+    body { background: linear-gradient(to bottom, var(--cream), var(--bg-mid)); }
+    .plant-heading { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.02em; color: var(--text-dark); }
+    input[type="text"], input[type="date"], select {
+      border: 2px solid var(--primary);
+      background: white;
+      color: var(--text-dark);
+    }
+    input:focus, select:focus, button:focus { outline: none; box-shadow: 0 0 0 4px rgba(55,85,52,0.15); border-color: var(--bg-mid); }
+    .surface { background: var(--cream); }
+    .btn-primary { background: var(--primary); color: var(--text-dark); }
+    .btn-primary:hover { background: var(--bg-mid); color: white; }
+    .accent-dark { background: var(--bg-dark); color: white; }
   </style>
 
 </head>
-<body class="min-h-screen bg-[#164A41] flex flex-col items-center justify-start p-2 sm:p-6">
+<body class="min-h-screen flex flex-col items-center justify-start p-2 sm:p-6">
 
   <main class="w-full max-w-3xl">
-    <section class="mx-auto rounded-2xl bg-gradient-to-b from-amber-50 to-yellow-50 p-3 sm:p-6 shadow-2xl border-4 border-amber-200">
-  <h1 class="plant-heading text-[#164A41] text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-6 tracking-wide">Todo List</h1>
+    <section class="mx-auto rounded-2xl surface p-3 sm:p-6 shadow-2xl border-4" style="border-color:var(--primary);">
+  <h1 class="plant-heading text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-6 tracking-wide" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Todo List</h1>
 
       <form id="todo-form" class="flex flex-col sm:flex-row gap-3 items-start">
    <input id="taskInput" type="text" placeholder="Add a todo..." 
-     class="flex-1 w-full rounded-lg px-4 py-2 bg-white border-2 border-[#9DCB8D] placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#4D774E]" />
-   <input id="dateInput" type="date" class="w-full sm:w-40 rounded-lg px-3 py-2 bg-white border-2 border-[#9DCB8D] focus:outline-none focus:ring-2 focus:ring-[#4D774E]" />
-   <button type="submit" class="w-full sm:w-auto text-[#164A41] rounded-lg px-4 py-2 bg-[#F1B24A] hover:bg-[#e0a33f] transition font-bold text-lg">+</button>
+     class="flex-1 w-full rounded-lg px-4 py-2 bg-white placeholder-slate-500 focus:outline-none" />
+   <input id="dateInput" type="date" class="w-full sm:w-40 rounded-lg px-3 py-2 bg-white focus:outline-none" />
+   <button type="submit" class="w-full sm:w-auto btn-primary rounded-lg px-4 py-2 transition font-bold text-lg">+</button>
       </form>
 
       <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div class="w-full sm:w-auto flex items-center gap-2">
-          <select id="filter-select" class="flex-1 sm:flex-none rounded-md px-3 py-2 bg-white border-2 border-[#9DCB8D] focus:outline-none focus:ring-2 focus:ring-[#4D774E] text-[#164A41] font-semibold">
+          <select id="filter-select" class="flex-1 sm:flex-none rounded-md px-3 py-2 bg-white focus:outline-none font-semibold" style="color:var(--text-dark)">
             <option value="all">All</option>
             <option value="pending">Pending</option>
             <option value="done">Done</option>
@@ -37,8 +56,8 @@
           </select>
         </div>
         <div class="w-full sm:w-auto flex items-center gap-2">
-          <div id="message" class="text-sm text-[#4D774E] flex-1 sm:flex-none font-medium"></div>
-          <button id="delete-all" class="w-full sm:w-auto rounded-md px-3 py-2 bg-[#F1B24A] hover:bg-[#e0a33f] transition text-[#164A41] font-bold">DELETE ALL</button>
+          <div id="message" class="text-sm flex-1 sm:flex-none font-medium" style="color:var(--bg-mid)"></div>
+          <button id="delete-all" class="w-full sm:w-auto btn-primary rounded-md px-3 py-2 transition font-bold">DELETE ALL</button>
         </div>
       </div>
 
@@ -46,7 +65,7 @@
       <div class="mt-4 bg-white/98 rounded-lg border-3 border-amber-300 overflow-hidden shadow-lg">
         <div class="max-h-96 overflow-y-auto">
           <table class="w-full text-left">
-            <thead class="bg-[#4D774E] text-white sticky top-0 font-bold">
+            <thead class="sticky top-0 font-bold" style="background:var(--bg-mid); color: white;">
               <tr>
                 <th class="p-1 sm:p-3 text-xs sm:text-sm">Task</th>
                 <th class="p-1 sm:p-3 text-xs sm:text-sm whitespace-nowrap">Due Date</th>
@@ -65,7 +84,7 @@
     </section>
   </main>
 
-  <footer class="mt-6 pt-5 border-t-2 border-[#9DCB8D] text-center text-[#FFFFFF] w-full max-w-3xl">
+  <footer class="mt-6 pt-5 border-t-2 text-center text-[#FFFFFF] w-full max-w-3xl" style="border-color:var(--primary);">
     <p>&copy; 2025 Todo List App by Yukie</p>
   </footer>
   <script src="js/script.js"></script>
